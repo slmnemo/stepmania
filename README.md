@@ -20,7 +20,7 @@ In short- you can do anything you like with the game (including sell products ma
 2. Claim to have created the engine yourself or remove the credits
 3. Not provide source code for any build which differs from any official release which includes MP3 support.
 
-(It's not required, but we would also appreciate it if you link back to http://www.stepmania.com/)
+If you are not looking for a very specific fork of Stepmania, please download from the link http://www.stepmania.com/
 
 For specific information/legalese:
 
