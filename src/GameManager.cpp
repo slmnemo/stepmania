@@ -34,7 +34,9 @@ enum
 	TRACK_14,
 	TRACK_15,
 	TRACK_16,
-	// 16 tracks needed for beat-double7 and techno-double8
+	TRACK_17,
+	TRACK_18,
+	// changed to 18 tracks to support 9 x 2 panels 
 };
 
 RString StepsTypeInfo::GetLocalizedString() const
@@ -532,6 +534,261 @@ static const Game g_Game_Dance =
 	TNS_W4,	// m_mapW4To
 	TNS_W5,	// m_mapW5To
 };
+
+// Important:  Every game must define the buttons: "Start", "Back", "MenuLeft", "Operator" and "MenuRight"
+static const AutoMappings g_AutoKeyMappings_Full = AutoMappings (
+	"",
+	"",
+	"",
+	AutoMappingEntry( 0, KEY_DEL,		GAME_BUTTON_MENULEFT,		false ),
+	AutoMappingEntry( 0, KEY_PGDN,		GAME_BUTTON_MENURIGHT,		false ),
+	AutoMappingEntry( 0, KEY_HOME,		GAME_BUTTON_MENUUP,		false ),
+	AutoMappingEntry( 0, KEY_END,		GAME_BUTTON_MENUDOWN,		false ),
+/*
+These values still need to be changed
+	AutoMappingEntry( 0, KEY_KP_C1,		FULL_BUTTON_DOWNLEFT,		false ),
+	AutoMappingEntry( 0, KEY_KP_C2,		FULL_BUTTON_DOWNCENTER,		false ),
+	AutoMappingEntry( 0, KEY_KP_C3,		FULL_BUTTON_DOWNRIGHT,		false ),
+	AutoMappingEntry( 0, KEY_KP_C4,		FULL_BUTTON_MIDLEFT,		false ),
+	AutoMappingEntry( 0, KEY_KP_C5,		FULL_BUTTON_MIDCENTER,		false ),
+	AutoMappingEntry( 0, KEY_KP_C6,		FULL_BUTTON_MIDRIGHT,		false ),
+	AutoMappingEntry( 0, KEY_KP_C7,		FULL_BUTTON_UPLEFT,		false ),
+	AutoMappingEntry( 0, KEY_KP_C8,		FULL_BUTTON_UPCENTER,		false ),
+	AutoMappingEntry( 0, KEY_KP_C9,		FULL_BUTTON_UPRIGHT,		false ),
+*/
+	AutoMappingEntry( 0, KEY_KP_SLASH,		GAME_BUTTON_MENULEFT,		true ),
+	AutoMappingEntry( 0, KEY_KP_ASTERISK,	GAME_BUTTON_MENURIGHT,		true ),
+	AutoMappingEntry( 0, KEY_KP_HYPHEN,		GAME_BUTTON_MENUUP,		true ),
+	AutoMappingEntry( 0, KEY_KP_PLUS,		GAME_BUTTON_MENUDOWN,		true ),
+	AutoMappingEntry( 0, KEY_KP_C1,		FULL_BUTTON_DOWNLEFT,		true ),
+	AutoMappingEntry( 0, KEY_KP_C2,		FULL_BUTTON_DOWNCENTER,		true ),
+	AutoMappingEntry( 0, KEY_KP_C3,		FULL_BUTTON_DOWNRIGHT,		true ),
+	AutoMappingEntry( 0, KEY_KP_C4,		FULL_BUTTON_MIDLEFT,		true ),
+	AutoMappingEntry( 0, KEY_KP_C5,		FULL_BUTTON_MIDCENTER,		true ),
+	AutoMappingEntry( 0, KEY_KP_C6,		FULL_BUTTON_MIDRIGHT,		true ),
+	AutoMappingEntry( 0, KEY_KP_C7,		FULL_BUTTON_UPLEFT,		true ),
+	AutoMappingEntry( 0, KEY_KP_C8,		FULL_BUTTON_UPCENTER,		true ),
+	AutoMappingEntry( 0, KEY_KP_C9,		FULL_BUTTON_UPRIGHT,		true ),
+);
+
+// FULL MODE STARTS HERE
+
+// xxx: get this from the theme? (see others)
+// the problem with getting it from the noteskin is that this is meant to be
+// static const; if we switch to anything we likely won't get const anymore
+// but i may be talking out of my ass -aj
+static const int FULL_COL_SPACING = 64;
+
+//static ThemeMetric<int>	DANCE_COL_SPACING("ColumnSpacing","Dance");
+// named after a similar metric in Aldo_MX's build for compatibility/familiarity:
+//float	DANCE_COL_SPACING	NOTESKIN->GetMetricF("NoteDisplay","ArrowColSpacing");
+/* looking for ARROW_SIZE should be enough (ArrowSize)
+ * just arroweffects.cpp for rowspacing (ArrowRowSpacing)
+ */
+
+static const Style g_Style_Full_Single =
+{	// STYLE_FULL_SINGLE
+	true,				// m_bUsedForGameplay
+	true,				// m_bUsedForEdit
+	true,				// m_bUsedForDemonstration
+	true,				// m_bUsedForHowToPlay
+	"single",			// m_szName
+	StepsType_full_single,	// m_StepsType
+	StyleType_OnePlayerOneSide,		// m_StyleType
+	9,				// m_iColsPerPlayer
+	{	// m_ColumnInfo[NUM_PLAYERS][MAX_COLS_PER_PLAYER];
+		{	// PLAYER_1
+			{ TRACK_1,	-FULL_COL_SPACING*3.5f, nullptr },
+			{ TRACK_2,	-FULL_COL_SPACING*2.5f, nullptr },
+			{ TRACK_3,	-FULL_COL_SPACING*1.5f, nullptr },
+			{ TRACK_4,	-FULL_COL_SPACING*0.5f, nullptr },
+			{ TRACK_5,	+FULL_COL_SPACING*0.0f, nullptr },
+			{ TRACK_6,	+FULL_COL_SPACING*0.5f, nullptr },
+			{ TRACK_7,	+FULL_COL_SPACING*1.5f, nullptr },
+			{ TRACK_8,	+FULL_COL_SPACING*2.5f, nullptr },
+			{ TRACK_9,	+FULL_COL_SPACING*3.5f, nullptr },
+		},
+		{	// PLAYER_2
+			{ TRACK_1,	-FULL_COL_SPACING*3.5f, nullptr },
+			{ TRACK_2,	-FULL_COL_SPACING*2.5f, nullptr },
+			{ TRACK_3,	-FULL_COL_SPACING*1.5f, nullptr },
+			{ TRACK_4,	-FULL_COL_SPACING*0.5f, nullptr },
+			{ TRACK_5,	+FULL_COL_SPACING*0.0f, nullptr },
+			{ TRACK_6,	+FULL_COL_SPACING*0.5f, nullptr },
+			{ TRACK_7,	+FULL_COL_SPACING*1.5f, nullptr },
+			{ TRACK_8,	+FULL_COL_SPACING*2.5f, nullptr },
+			{ TRACK_9,	+FULL_COL_SPACING*3.5f, nullptr },
+		},
+	},
+	{	// m_iInputColumn[NUM_GameController][NUM_GameButton]
+		{ 0, 3, 2, 1, Style::END_MAPPING },
+		{ 0, 3, 2, 1, Style::END_MAPPING }
+	},
+	{	// m_iColumnDrawOrder[MAX_COLS_PER_PLAYER];
+		0, 1, 2, 3
+	},
+	true, // m_bCanUseBeginnerHelper
+	false, // m_bLockDifficulties
+};
+
+static const Style g_Style_Full_Versus =
+{	// STYLE_FULL_VERSUS
+	true,				// m_bUsedForGameplay
+	false,				// m_bUsedForEdit
+	true,				// m_bUsedForDemonstration
+	false,				// m_bUsedForHowToPlay
+	"versus",			// m_szName
+	StepsType_full_single,	// m_StepsType
+	StyleType_TwoPlayersTwoSides,		// m_StyleType
+	9,				// m_iColsPerPlayer
+	{	// m_ColumnInfo[NUM_PLAYERS][MAX_COLS_PER_PLAYER];
+		{	// PLAYER_1
+			{ TRACK_1,	-FULL_COL_SPACING*3.5f, nullptr },
+			{ TRACK_2,	-FULL_COL_SPACING*2.5f, nullptr },
+			{ TRACK_3,	-FULL_COL_SPACING*1.5f, nullptr },
+			{ TRACK_4,	-FULL_COL_SPACING*0.5f, nullptr },
+			{ TRACK_5,	+FULL_COL_SPACING*0.0f, nullptr },
+			{ TRACK_6,	+FULL_COL_SPACING*0.5f, nullptr },
+			{ TRACK_7,	+FULL_COL_SPACING*1.5f, nullptr },
+			{ TRACK_8,	+FULL_COL_SPACING*2.5f, nullptr },
+			{ TRACK_9,	+FULL_COL_SPACING*3.5f, nullptr },
+		},
+		{	// PLAYER_2
+			{ TRACK_1,	-FULL_COL_SPACING*3.5f, nullptr },
+			{ TRACK_2,	-FULL_COL_SPACING*2.5f, nullptr },
+			{ TRACK_3,	-FULL_COL_SPACING*1.5f, nullptr },
+			{ TRACK_4,	-FULL_COL_SPACING*0.5f, nullptr },
+			{ TRACK_5,	+FULL_COL_SPACING*0.0f, nullptr },
+			{ TRACK_6,	+FULL_COL_SPACING*0.5f, nullptr },
+			{ TRACK_7,	+FULL_COL_SPACING*1.5f, nullptr },
+			{ TRACK_8,	+FULL_COL_SPACING*2.5f, nullptr },
+			{ TRACK_9,	+FULL_COL_SPACING*3.5f, nullptr },
+		},
+	},
+	{
+		{ 0, 3, 2, 1, Style::END_MAPPING },
+		{ 0, 3, 2, 1, Style::END_MAPPING }
+	},
+	{	// m_iColumnDrawOrder[MAX_COLS_PER_PLAYER];
+		0, 1, 2, 3
+	},
+	true, // m_bCanUseBeginnerHelper
+	false, // m_bLockDifficulties
+};
+
+static const Style g_Style_Full_Double =
+{	// STYLE_FULL_DOUBLE
+	true,				// m_bUsedForGameplay
+	true,				// m_bUsedForEdit
+	true,				// m_bUsedForDemonstration
+	false,				// m_bUsedForHowToPlay
+	"double",			// m_szName
+	StepsType_full_double,	// m_StepsType
+	StyleType_OnePlayerTwoSides,		// m_StyleType
+	18,				// m_iColsPerPlayer
+	{	// m_ColumnInfo[NUM_PLAYERS][MAX_COLS_PER_PLAYER];
+		{	// PLAYER_1
+			{ TRACK_1,	-FULL_COL_SPACING*8.5f, nullptr },
+			{ TRACK_2,	-FULL_COL_SPACING*7.5f, nullptr },
+			{ TRACK_3,	-FULL_COL_SPACING*6.5f, nullptr },
+			{ TRACK_4,	-FULL_COL_SPACING*5.5f, nullptr },
+			{ TRACK_5,	-FULL_COL_SPACING*4.5f, nullptr },
+			{ TRACK_6,	-FULL_COL_SPACING*3.5f, nullptr },
+			{ TRACK_7,	-FULL_COL_SPACING*2.5f, nullptr },
+			{ TRACK_8,	-FULL_COL_SPACING*1.5f, nullptr },
+			{ TRACK_9,	-FULL_COL_SPACING*0.5f, nullptr },
+			{ TRACK_10,	+FULL_COL_SPACING*0.5f, nullptr },
+			{ TRACK_11,	+FULL_COL_SPACING*1.5f, nullptr },
+			{ TRACK_12,	+FULL_COL_SPACING*2.5f, nullptr },
+			{ TRACK_13,	+FULL_COL_SPACING*3.5f, nullptr },
+			{ TRACK_14,	+FULL_COL_SPACING*4.5f, nullptr },
+			{ TRACK_15,	+FULL_COL_SPACING*5.5f, nullptr },
+			{ TRACK_16,	+FULL_COL_SPACING*6.5f, nullptr },
+			{ TRACK_17,	+FULL_COL_SPACING*7.5f, nullptr },
+			{ TRACK_18,	+FULL_COL_SPACING*8.5f, nullptr },
+		},
+		{	// PLAYER_2
+			{ TRACK_1,	-FULL_COL_SPACING*8.5f, nullptr },
+			{ TRACK_2,	-FULL_COL_SPACING*7.5f, nullptr },
+			{ TRACK_3,	-FULL_COL_SPACING*6.5f, nullptr },
+			{ TRACK_4,	-FULL_COL_SPACING*5.5f, nullptr },
+			{ TRACK_5,	-FULL_COL_SPACING*4.5f, nullptr },
+			{ TRACK_6,	-FULL_COL_SPACING*3.5f, nullptr },
+			{ TRACK_7,	-FULL_COL_SPACING*2.5f, nullptr },
+			{ TRACK_8,	-FULL_COL_SPACING*1.5f, nullptr },
+			{ TRACK_9,	-FULL_COL_SPACING*0.5f, nullptr },
+			{ TRACK_10,	+FULL_COL_SPACING*0.5f, nullptr },
+			{ TRACK_11,	+FULL_COL_SPACING*1.5f, nullptr },
+			{ TRACK_12,	+FULL_COL_SPACING*2.5f, nullptr },
+			{ TRACK_13,	+FULL_COL_SPACING*3.5f, nullptr },
+			{ TRACK_14,	+FULL_COL_SPACING*4.5f, nullptr },
+			{ TRACK_15,	+FULL_COL_SPACING*5.5f, nullptr },
+			{ TRACK_16,	+FULL_COL_SPACING*6.5f, nullptr },
+			{ TRACK_17,	+FULL_COL_SPACING*7.5f, nullptr },
+			{ TRACK_18,	+FULL_COL_SPACING*8.5f, nullptr },
+		},
+	},
+	{	// m_iInputColumn[NUM_GameController][NUM_GameButton]
+		{ 0, 3, 2, 1, Style::END_MAPPING },
+		{ 4, 7, 6, 5, Style::END_MAPPING }
+	},
+	{	// m_iColumnDrawOrder[MAX_COLS_PER_PLAYER];
+		0,1,2,3,4,5,6,7
+	},
+	false, // m_bCanUseBeginnerHelper
+	false, // m_bLockDifficulties
+};
+
+static const Style *g_apGame_Full_Styles[] =
+{
+	&g_Style_Full_Single,
+	&g_Style_Full_Versus,
+	&g_Style_Full_Double,
+	nullptr
+};
+
+static const Game g_Game_Dance = 
+{
+	"full",					// m_szName
+	g_apGame_Full_Styles,				// m_apStyles
+	false,						// m_bCountNotesSeparately
+	false, // m_bTickHolds
+	false, // m_PlayersHaveSeparateStyles
+	{						// m_InputScheme
+		"full",				// m_szName
+		NUM_FULL_BUTTONS,			// m_iButtonsPerController
+		{	// m_szButtonNames
+			{ "DownLeft",		GameButton_Invalid },
+			{ "DownCenter",		GAME_BUTTON_DOWN },
+			{ "DownRight",		GameButton_Invalid },
+			{ "MidLeft",			GAME_BUTTON_LEFT },
+			{ "MidCenter",		GAME_BUTTON_START },
+			{ "MidRight",		GAME_BUTTON_RIGHT },
+			{ "UpLeft",		GameButton_Invalid },
+			{ "UpCenter",		GAME_BUTTON_UP },
+			{ "UpRight",		GameButton_Invalid },
+		},
+		&g_AutoKeyMappings_Full
+	},
+	{
+		{ GameButtonType_Step },
+		{ GameButtonType_Step },
+		{ GameButtonType_Step },
+		{ GameButtonType_Step },
+		{ GameButtonType_Step },
+		{ GameButtonType_Step },
+		{ GameButtonType_Step },
+		{ GameButtonType_Step },
+		{ GameButtonType_Step },
+	},
+	TNS_W1,	// m_mapW1To
+	TNS_W2,	// m_mapW2To
+	TNS_W3,	// m_mapW3To
+	TNS_W4,	// m_mapW4To
+	TNS_W5,	// m_mapW5To
+};
+
+//FULL MODE ENDS HERE
 
 static const AutoMappings g_AutoKeyMappings_Pump = AutoMappings (
 	"",
