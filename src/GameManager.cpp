@@ -97,6 +97,9 @@ static const StepsTypeInfo g_StepsTypeInfos[] = {
 	{ "kickbox-quadarm", 4, true, StepsTypeCategory_Single },
 	{ "kickbox-insect", 6, true, StepsTypeCategory_Single },
 	{ "kickbox-arachnid", 8, true, StepsTypeCategory_Single },
+	// full
+	{ "full-single", 9, true, StepsTypeCategory_Single },
+	{ "full-double", 18, true, StepsTypeCategory_Double },
 };
 
 
