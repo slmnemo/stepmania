@@ -535,6 +535,8 @@ static const Game g_Game_Dance =
 	TNS_W5,	// m_mapW5To
 };
 
+// FULL MODE STARTS HERE
+
 // Important:  Every game must define the buttons: "Start", "Back", "MenuLeft", "Operator" and "MenuRight"
 static const AutoMappings g_AutoKeyMappings_Full = AutoMappings (
 	"",
@@ -570,8 +572,6 @@ These values still need to be changed
 	AutoMappingEntry( 0, KEY_KP_C8,		FULL_BUTTON_UPCENTER,		true ),
 	AutoMappingEntry( 0, KEY_KP_C9,		FULL_BUTTON_UPRIGHT,		true ),
 );
-
-// FULL MODE STARTS HERE
 
 // xxx: get this from the theme? (see others)
 // the problem with getting it from the noteskin is that this is meant to be

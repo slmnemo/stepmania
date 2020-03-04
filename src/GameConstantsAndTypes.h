@@ -80,6 +80,8 @@ enum StepsType
 	StepsType_dance_solo,
 	StepsType_dance_threepanel,
 	StepsType_dance_routine,
+	StepsType_full_single,
+	StepsType_full_double,
 	StepsType_pump_single,
 	StepsType_pump_halfdouble,
 	StepsType_pump_double,
