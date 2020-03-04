@@ -747,7 +747,7 @@ static const Style *g_apGame_Full_Styles[] =
 	nullptr
 };
 
-static const Game g_Game_Dance = 
+static const Game g_Full_Dance = 
 {
 	"full",					// m_szName
 	g_apGame_Full_Styles,				// m_apStyles
