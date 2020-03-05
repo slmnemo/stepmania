@@ -16,10 +16,6 @@ Compiled using [CMake](http://www.cmake.org/). More information about using CMak
 
 In short- you can do anything you like with the game (including sell products made with it), provided you *do not*:
 
-1. Sell the game *with the included songs*
-2. Claim to have created the engine yourself or remove the credits
-3. Not provide source code for any build which differs from any official release which includes MP3 support.
-
 If you are not looking for a very specific fork of Stepmania, please download from the link http://www.stepmania.com/
 
 For specific information/legalese:
